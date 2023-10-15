@@ -49,7 +49,7 @@ class Scene extends Phaser.Scene {
 
     this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
       const ballType = `ball${Math.floor(Math.random() * 5) + 1}`;
-      this.createBall(ballType, pointer.x, pointer.y);
+      this.createBall(ballType, pointer.x, 100);
     });
 
     this.matter.world.on(

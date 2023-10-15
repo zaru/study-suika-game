@@ -19,6 +19,7 @@ class Scene extends Phaser.Scene {
     11: 1,
   };
   #nextBallType = "ball1";
+  #nextBall;
 
   constructor() {
     super();
@@ -55,7 +56,7 @@ class Scene extends Phaser.Scene {
     this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
       this.createBall(this.#nextBallType, pointer.x, 100);
       this.#nextBallType = `ball${weightedRandomInt()}`;
-      nextBall.setTexture(this.#nextBallType);
+      this.#nextBall.setTexture(this.#nextBallType);
     });
 
     this.matter.world.on(
@@ -101,22 +102,22 @@ class Scene extends Phaser.Scene {
     const nextBg = this.matter.add.image(650, 50, "next", undefined, option);
     nextBg.setScale(0.22);
     nextBg.setStatic(true);
-    const nextBall = this.matter.add.image(
+    this.#nextBall = this.matter.add.image(
       650,
       55,
       this.#nextBallType,
       undefined,
       option,
     );
-    nextBall.setScale(0.08);
-    nextBall.setStatic(true);
+    this.#nextBall.setScale(0.08);
+    this.#nextBall.setStatic(true);
   }
 
   private createBall(ballType: string, x: number, y: number) {
     const ballShape = this.cache.json.get("ballShape");
     const ball = this.matter.add.image(x, y, ballType, undefined, {
       shape: ballShape[ballType],
-      restitution: 0.15,
+      restitution: 0.1,
       friction: 0.001,
     });
     const ballNum = Number(ballType.replace("ball", ""));

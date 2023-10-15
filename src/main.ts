@@ -9,8 +9,10 @@ class Scene extends Phaser.Scene {
 
   preload() {
     this.load.json("ballShape", "assets/ball.json");
-    this.load.image("ball", "assets/ball.png");
+    this.load.image("ball1", "assets/ball1.png");
     this.load.image("ball2", "assets/ball2.png");
+    this.load.image("ball3", "assets/ball3.png");
+    this.load.image("ball4", "assets/ball4.png");
   }
 
   create() {
@@ -24,7 +26,7 @@ class Scene extends Phaser.Scene {
     this.#balls = [];
 
     this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
-      this.createBall("ball", pointer.x, pointer.y);
+      this.createBall("ball1", pointer.x, pointer.y);
     });
 
     this.matter.world.on(
@@ -36,13 +38,20 @@ class Scene extends Phaser.Scene {
       ) => {
         if (
           this.#balls.includes(ballA.parent.gameObject) &&
-          this.#balls.includes(ballB.parent.gameObject)
+          this.#balls.includes(ballB.parent.gameObject) &&
+          ballA.parent.gameObject.getData("ballType") ===
+            ballB.parent.gameObject.getData("ballType")
         ) {
           const x = ballA.position.x;
           const y = ballA.position.y;
-          ballA.parent.gameObject.destroy();
-          ballB.parent.gameObject.destroy();
-          this.createBall("ball2", x, y);
+          const ballNum = Number(
+            ballA.parent.gameObject.getData("ballType").replace("ball", ""),
+          );
+          if (ballNum < 5) {
+            ballA.parent.gameObject.destroy();
+            ballB.parent.gameObject.destroy();
+            this.createBall(`ball${ballNum + 1}`, x, y);
+          }
         }
       },
     );
@@ -55,6 +64,7 @@ class Scene extends Phaser.Scene {
       restitution: 0.6,
       friction: 0.01,
     });
+    ball.setData("ballType", ballType);
     this.#balls.push(ball);
   }
 }

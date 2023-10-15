@@ -1,31 +1,5 @@
 {
 	"generator_info": "Shape definitions generated with PhysicsEditor. Visit https://www.codeandweb.com/physicseditor",
-	"ball": {
-		"type": "fromPhysicsEditor",
-		"label": "ball",
-		"isStatic": false,
-		"density": 0.1,
-		"restitution": 0,
-		"friction": 0.1,
-		"frictionAir": 0.01,
-		"frictionStatic": 0.5,
-		"collisionFilter": {
-			"group": 0,
-			"category": 1,
-			"mask": 255
-		},
-		"fixtures": [
-			{
-				"label": "",
-				"isSensor": false,
-				"circle": {
-					"x": 64,
-					"y": 64,
-					"radius": 64
-				}
-			}
-		]
-	},
 	"ball2": {
 		"type": "fromPhysicsEditor",
 		"label": "ball2",
@@ -46,8 +20,86 @@
 				"isSensor": false,
 				"circle": {
 					"x": 84,
-					"y": 84,
-					"radius": 84
+					"y": 83.74233128834355,
+					"radius": 82.64603875432277
+				}
+			}
+		]
+	},
+	"ball3": {
+		"type": "fromPhysicsEditor",
+		"label": "ball3",
+		"isStatic": false,
+		"density": 0.10000000149011612,
+		"restitution": 0,
+		"friction": 0.10000000149011612,
+		"frictionAir": 0.009999999776482582,
+		"frictionStatic": 0.5,
+		"collisionFilter": {
+			"group": 0,
+			"category": 1,
+			"mask": 255
+		},
+		"fixtures": [
+			{
+				"label": "",
+				"isSensor": false,
+				"circle": {
+					"x": 112,
+					"y": 111.65644171779141,
+					"radius": 111.41246181632107
+				}
+			}
+		]
+	},
+	"ball4": {
+		"type": "fromPhysicsEditor",
+		"label": "ball4",
+		"isStatic": false,
+		"density": 0.10000000149011612,
+		"restitution": 0,
+		"friction": 0.10000000149011612,
+		"frictionAir": 0.009999999776482582,
+		"frictionStatic": 0.5,
+		"collisionFilter": {
+			"group": 0,
+			"category": 1,
+			"mask": 255
+		},
+		"fixtures": [
+			{
+				"label": "",
+				"isSensor": false,
+				"circle": {
+					"x": 128,
+					"y": 127.60736196319019,
+					"radius": 126.56160689658675
+				}
+			}
+		]
+	},
+	"ball1": {
+		"type": "fromPhysicsEditor",
+		"label": "ball",
+		"isStatic": false,
+		"density": 0.10000000149011612,
+		"restitution": 0,
+		"friction": 0.10000000149011612,
+		"frictionAir": 0.009999999776482582,
+		"frictionStatic": 0.5,
+		"collisionFilter": {
+			"group": 0,
+			"category": 1,
+			"mask": 255
+		},
+		"fixtures": [
+			{
+				"label": "",
+				"isSensor": false,
+				"circle": {
+					"x": 64.15950920245399,
+					"y": 63.84049079754601,
+					"radius": 63.85684620174394
 				}
 			}
 		]

@@ -45,12 +45,7 @@ class Scene extends Phaser.Scene {
       lineStyle: { width: 6, color: 0xeeeeee, alpha: 0.5 },
     });
 
-    const nextBg = this.matter.add.image(650, 50, "next");
-    nextBg.setScale(0.22);
-    nextBg.setStatic(true);
-    const nextBall = this.matter.add.image(650, 55, this.#nextBallType);
-    nextBall.setScale(0.08);
-    nextBall.setStatic(true);
+    this.setUpNextBall();
 
     // マウスの動きに応じて更新
     this.input.on("pointermove", (pointer: Phaser.Input.Pointer) => {
@@ -92,6 +87,29 @@ class Scene extends Phaser.Scene {
         }
       },
     );
+  }
+
+  private setUpNextBall() {
+    const nonCollidingCategory = 0x0002;
+    const option = {
+      isStatic: true,
+      collisionFilter: {
+        category: nonCollidingCategory,
+        mask: 0,
+      },
+    };
+    const nextBg = this.matter.add.image(650, 50, "next", undefined, option);
+    nextBg.setScale(0.22);
+    nextBg.setStatic(true);
+    const nextBall = this.matter.add.image(
+      650,
+      55,
+      this.#nextBallType,
+      undefined,
+      option,
+    );
+    nextBall.setScale(0.08);
+    nextBall.setStatic(true);
   }
 
   private createBall(ballType: string, x: number, y: number) {

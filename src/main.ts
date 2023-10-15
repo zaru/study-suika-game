@@ -1,10 +1,11 @@
 import Phaser from "phaser";
 
 class Scene extends Phaser.Scene {
-  #balls: Phaser.Physics.Matter.MatterPhysics.Image[];
+  #balls: Phaser.Physics.Matter.Image[];
 
   constructor() {
     super();
+    this.#balls = [];
   }
 
   preload() {
@@ -22,8 +23,6 @@ class Scene extends Phaser.Scene {
       this.cameras.main.width,
       this.cameras.main.height,
     );
-
-    this.#balls = [];
 
     this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
       this.createBall("ball1", pointer.x, pointer.y);
@@ -78,7 +77,7 @@ const config: Phaser.Types.Core.GameConfig = {
     default: "matter",
     matter: {
       gravity: { y: 1.5 },
-      debug: false, // これをtrueに設定することでMatterのデバッグレンダリングを有効にできます
+      debug: false,
     },
   },
   scene: Scene,

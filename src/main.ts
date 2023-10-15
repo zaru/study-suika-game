@@ -1,21 +1,22 @@
 import Phaser from "phaser";
+import { weightedRandomInt } from "./util.ts";
 
 class Scene extends Phaser.Scene {
   #balls: Phaser.Physics.Matter.Image[];
   #line: Phaser.GameObjects.Graphics;
   #maxTypeNum = 11;
   #ballSize = {
-    1: 0.1,
+    1: 0.08,
     2: 0.115,
     3: 0.135,
-    4: 0.155,
-    5: 0.225,
+    4: 0.195,
+    5: 0.265,
     6: 0.3,
-    7: 0.4,
-    8: 0.5,
-    9: 0.6,
-    10: 0.7,
-    11: 0.8,
+    7: 0.5,
+    8: 0.6,
+    9: 0.7,
+    10: 0.8,
+    11: 0.9,
   };
 
   constructor() {
@@ -48,7 +49,7 @@ class Scene extends Phaser.Scene {
     });
 
     this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
-      const ballType = `ball${Math.floor(Math.random() * 5) + 1}`;
+      const ballType = `ball${weightedRandomInt()}`;
       this.createBall(ballType, pointer.x, 100);
     });
 

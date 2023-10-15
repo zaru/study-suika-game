@@ -2,6 +2,7 @@ import Phaser from "phaser";
 
 class Scene extends Phaser.Scene {
   #balls: Phaser.Physics.Matter.Image[];
+  #line: Phaser.GameObjects.Graphics;
   #maxTypeNum = 11;
   #ballSize = {
     1: 0.1,
@@ -36,6 +37,15 @@ class Scene extends Phaser.Scene {
       this.cameras.main.width,
       this.cameras.main.height,
     );
+
+    this.#line = this.add.graphics({
+      lineStyle: { width: 6, color: 0xeeeeee, alpha: 0.5 },
+    });
+
+    // マウスの動きに応じて更新
+    this.input.on("pointermove", (pointer: Phaser.Input.Pointer) => {
+      this.drawVerticalLine(pointer.x);
+    });
 
     this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
       const ballType = `ball${Math.floor(Math.random() * 5) + 1}`;
@@ -85,6 +95,20 @@ class Scene extends Phaser.Scene {
 
     ball.setData("ballType", ballType);
     this.#balls.push(ball);
+  }
+
+  private drawVerticalLine(x: number) {
+    const segmentLength = 10;
+    const gapLength = 5;
+    const totalHeight = this.sys.game.config.height as number;
+
+    this.#line.clear();
+
+    for (let y = 0; y < totalHeight; y += segmentLength + gapLength) {
+      const startY = y;
+      const endY = Phaser.Math.Clamp(y + segmentLength, 0, totalHeight);
+      this.#line.lineBetween(x, startY, x, endY);
+    }
   }
 }
 

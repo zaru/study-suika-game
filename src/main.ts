@@ -6,17 +6,17 @@ class Scene extends Phaser.Scene {
   #line: Phaser.GameObjects.Graphics;
   #maxTypeNum = 11;
   #ballSize = {
-    1: 0.08,
-    2: 0.13,
-    3: 0.2,
-    4: 0.28,
-    5: 0.36,
-    6: 0.44,
-    7: 0.56,
-    8: 0.63,
-    9: 0.73,
-    10: 0.8,
-    11: 0.9,
+    1: 0.1,
+    2: 0.11,
+    3: 0.15,
+    4: 0.3,
+    5: 0.4,
+    6: 0.5,
+    7: 0.6,
+    8: 0.7,
+    9: 0.8,
+    10: 0.9,
+    11: 1,
   };
   #nextBallType = "ball1";
 

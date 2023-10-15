@@ -18,6 +18,7 @@ class Scene extends Phaser.Scene {
     10: 0.8,
     11: 0.9,
   };
+  #nextBallType = "ball1";
 
   constructor() {
     super();
@@ -29,6 +30,7 @@ class Scene extends Phaser.Scene {
     for (let i = 1; i <= this.#maxTypeNum; i++) {
       this.load.image(`ball${i}`, `assets/ball${i}.png`);
     }
+    this.load.image("next", "assets/next.png");
   }
 
   create() {
@@ -43,14 +45,22 @@ class Scene extends Phaser.Scene {
       lineStyle: { width: 6, color: 0xeeeeee, alpha: 0.5 },
     });
 
+    const nextBg = this.matter.add.image(750, 50, "next");
+    nextBg.setScale(0.22);
+    nextBg.setStatic(true);
+    const nextBall = this.matter.add.image(750, 55, this.#nextBallType);
+    nextBall.setScale(0.08);
+    nextBall.setStatic(true);
+
     // マウスの動きに応じて更新
     this.input.on("pointermove", (pointer: Phaser.Input.Pointer) => {
       this.drawVerticalLine(pointer.x);
     });
 
     this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
-      const ballType = `ball${weightedRandomInt()}`;
-      this.createBall(ballType, pointer.x, 100);
+      this.createBall(this.#nextBallType, pointer.x, 100);
+      this.#nextBallType = `ball${weightedRandomInt()}`;
+      nextBall.setTexture(this.#nextBallType);
     });
 
     this.matter.world.on(

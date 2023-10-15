@@ -10,6 +10,7 @@ class Scene extends Phaser.Scene {
   preload() {
     this.load.json("ballShape", "assets/ball.json");
     this.load.image("ball", "assets/ball.png");
+    this.load.image("ball2", "assets/ball2.png");
   }
 
   create() {
@@ -23,7 +24,7 @@ class Scene extends Phaser.Scene {
     this.#balls = [];
 
     this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
-      this.createBall(pointer.x, pointer.y);
+      this.createBall("ball", pointer.x, pointer.y);
     });
 
     this.matter.world.on(
@@ -37,20 +38,23 @@ class Scene extends Phaser.Scene {
           this.#balls.includes(ballA.parent.gameObject) &&
           this.#balls.includes(ballB.parent.gameObject)
         ) {
+          const x = ballA.position.x;
+          const y = ballA.position.y;
           ballA.parent.gameObject.destroy();
+          ballB.parent.gameObject.destroy();
+          this.createBall("ball2", x, y);
         }
       },
     );
   }
 
-  private createBall(x: number, y: number) {
+  private createBall(ballType: string, x: number, y: number) {
     const ballShape = this.cache.json.get("ballShape");
-    const ball = this.matter.add.image(x, y, "ball", undefined, {
-      shape: ballShape.ball,
+    const ball = this.matter.add.image(x, y, ballType, undefined, {
+      shape: ballShape[ballType],
       restitution: 0.6,
       friction: 0.01,
     });
-
     this.#balls.push(ball);
   }
 }

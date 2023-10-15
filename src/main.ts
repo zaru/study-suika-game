@@ -3,6 +3,7 @@ import { weightedRandomInt } from "./util.ts";
 
 class Scene extends Phaser.Scene {
   #balls: Phaser.Physics.Matter.Image[];
+  // @ts-ignore
   #line: Phaser.GameObjects.Graphics;
   #maxTypeNum = 11;
   #ballSize = {
@@ -19,6 +20,7 @@ class Scene extends Phaser.Scene {
     11: 1,
   };
   #nextBallType = "ball1";
+  // @ts-ignore
   #nextBall;
 
   constructor() {
@@ -121,6 +123,7 @@ class Scene extends Phaser.Scene {
       friction: 0.001,
     });
     const ballNum = Number(ballType.replace("ball", ""));
+    // @ts-ignore
     ball.setScale(this.#ballSize[ballNum]);
 
     ball.setData("ballType", ballType);

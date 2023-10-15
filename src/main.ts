@@ -7,14 +7,14 @@ class Scene extends Phaser.Scene {
   #maxTypeNum = 11;
   #ballSize = {
     1: 0.08,
-    2: 0.115,
-    3: 0.135,
-    4: 0.195,
-    5: 0.265,
-    6: 0.3,
-    7: 0.5,
-    8: 0.6,
-    9: 0.7,
+    2: 0.13,
+    3: 0.2,
+    4: 0.28,
+    5: 0.36,
+    6: 0.44,
+    7: 0.56,
+    8: 0.63,
+    9: 0.73,
     10: 0.8,
     11: 0.9,
   };
@@ -45,10 +45,10 @@ class Scene extends Phaser.Scene {
       lineStyle: { width: 6, color: 0xeeeeee, alpha: 0.5 },
     });
 
-    const nextBg = this.matter.add.image(750, 50, "next");
+    const nextBg = this.matter.add.image(650, 50, "next");
     nextBg.setScale(0.22);
     nextBg.setStatic(true);
-    const nextBall = this.matter.add.image(750, 55, this.#nextBallType);
+    const nextBall = this.matter.add.image(650, 55, this.#nextBallType);
     nextBall.setScale(0.08);
     nextBall.setStatic(true);
 
@@ -98,8 +98,8 @@ class Scene extends Phaser.Scene {
     const ballShape = this.cache.json.get("ballShape");
     const ball = this.matter.add.image(x, y, ballType, undefined, {
       shape: ballShape[ballType],
-      restitution: 0.5,
-      friction: 0.01,
+      restitution: 0.15,
+      friction: 0.001,
     });
     const ballNum = Number(ballType.replace("ball", ""));
     ball.setScale(this.#ballSize[ballNum]);
@@ -125,8 +125,8 @@ class Scene extends Phaser.Scene {
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
-  width: 800,
-  height: 1200,
+  width: 700,
+  height: 900,
   parent: "app",
   physics: {
     default: "matter",

@@ -11,7 +11,7 @@ function generateWeights(maxValue: number): IWeight[] {
   return weights;
 }
 
-export function weightedRandomInt(max = 5) {
+export function weightedRandomInt(max = 4) {
   const weights: IWeight[] = generateWeights(max);
   const totalWeight: number = weights.reduce(
     (acc, curr) => acc + curr.weight,
